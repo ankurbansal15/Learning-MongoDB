@@ -20,7 +20,6 @@ const userSchema = new mongoose.Schema({
 const User = mongoose.model('User', userSchema); 
 const Employee = mongoose.model('Employee', userSchema);
 
-
 const user1 = new User({name: 'John', age: 25, email: 'john@gmail.com'});
 const user2 = new User({name: 'Jane', age: 30, email: 'jane@gmail.com'});
 const employee1 = new Employee({name: 'Tom', age: 35, email: 'tom@gmail.com'});
@@ -54,6 +53,54 @@ User.insertMany([
     {name: 'David', age: 26, email: 'david@gmail.com'},
 ]).then(() => {
     console.log('Users saved');
+}).catch(err => {
+    console.error(err);
+}); 
+
+User.find({}).then((res)=>{
+    console.log(res);
+}).catch(err => {
+    console.error(err);
+}
+);
+
+User.updateOne({name: 'John'}, {age: 21}).then((res) => {
+    console.log(res);
+}).catch(err => {
+    console.error(err);
+});
+
+User.updateMany({age: {$gt:21}}, {age: 22}).then((res) => {
+    console.log(res);
+}).catch(err => {
+    console.error(err);
+});
+
+User.findOneAndUpdate({name: 'Jane'}, {age: 31}).then((res) => {
+    console.log(res);
+}).catch(err => {  
+    console.error(err);
+});
+User.findOneAndUpdate({name: 'Jane'}, {age: 31},{new : true}).then((res) => {
+    console.log(res);
+}).catch(err => {  
+    console.error(err);
+});
+
+User.deleteOne({name: 'Alice'}).then((res) => {
+    console.log(res);
+}).catch(err => {
+    console.error(err);
+});
+
+User.deleteMany({age:48}).then((res) => {
+    console.log(res);
+}).catch(err => {
+    console.error(err);
+});
+
+User.findByIdAndDelete('672d06c752e9d17e57aa25bd').then((res) => {
+    console.log(res);
 }).catch(err => {
     console.error(err);
 });
